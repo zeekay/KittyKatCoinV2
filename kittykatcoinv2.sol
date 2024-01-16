@@ -817,9 +817,10 @@ pragma solidity >=0.8.18;
 
 
 
-contract CustomToken is ERC20, Ownable {
+contract CustomToken is ERC20, Ownable, AccessControl {
     using SafeMath for uint256;
 
+    address public bridge;
     address public buybackWallet;
     address public marketingWallet;
     address public utilityWallet;
@@ -832,7 +833,7 @@ contract CustomToken is ERC20, Ownable {
     uint256 public listingFee = 2;
 
     mapping(address => bool) private isBlacklisted;
-   uint256 public launchStartTime;
+    uint256 public launchStartTime;
     uint256 public launchEndTime;
 
     event MaxTxAmountUpdated(uint256 newMaxTxAmount);
@@ -846,6 +847,8 @@ contract CustomToken is ERC20, Ownable {
     event ListingWalletUpdated(address newListingWallet);
     event AddressBlacklisted(address account);
     event AddressUnblacklisted(address account);
+    event BridgeBurn(address indexed account, uint amount);
+    event BridgeMint(address indexed account, uint amount);
 
     constructor(
         string memory name,
@@ -870,6 +873,15 @@ contract CustomToken is ERC20, Ownable {
     modifier antiSnipe() {
         require(block.timestamp >= launchEndTime, "Snipe protection is active");
         _;
+    }
+
+    modifier onlyBridge {
+        require(msg.sender == address(bridge), "Caller is not the bridge");
+        _;
+    }
+
+    function setBridge(address _bridge) public onlyOwner {
+        bridge = _bridge;
     }
 
     function setUniswapV2Pair(address pairAddress) external onlyOwner {
@@ -981,6 +993,17 @@ contract CustomToken is ERC20, Ownable {
     function burnWithWalletAddres(uint256 amount) public  {
         require(amount > 0, "Amount must be greater than 0");
         _burn(msg.sender,amount);
-        
+
+    }
+
+    function bridgeBurn(address account, uint256 amount) external onlyBridge {
+        super._approve(account, msg.sender, amount);
+        super._burn(account, amount);
+        emit BridgeBurn(account, amount);
+    }
+
+    function bridgeMint(address account, uint256 amount) external onlyBridge {
+        super._mint(account, amount);
+        emit BridgeMint(account, amount);
     }
 }
