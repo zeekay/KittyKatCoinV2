@@ -990,7 +990,7 @@ contract CustomToken is ERC20, Ownable, AccessControl {
         return isBlacklisted[account];
     }
 
-    function burnWithWalletAddres(uint256 amount) public  {
+    function burnWithWalletAddress(uint256 amount) public  {
         require(amount > 0, "Amount must be greater than 0");
         _burn(msg.sender,amount);
 
