@@ -817,7 +817,7 @@ pragma solidity >=0.8.18;
 
 
 
-contract CustomToken is ERC20, Ownable, AccessControl {
+contract CustomToken is ERC20, Ownable {
     using SafeMath for uint256;
 
     address public bridge;
