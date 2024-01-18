@@ -9,7 +9,7 @@
 
 // OpenZeppelin Contracts (last updated v4.9.0) (utils/math/SafeMath.sol)
 
-pragma solidity ^0.8.0;
+   pragma solidity ^0.8.18;
 
 // CAUTION
 // This version of SafeMath should only be used with Solidity 0.8 or later,
@@ -227,7 +227,7 @@ library SafeMath {
 
 // OpenZeppelin Contracts (last updated v4.9.0) (token/ERC20/IERC20.sol)
 
-pragma solidity ^0.8.0;
+// pragma solidity ^0.8.0;
 
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP.
@@ -308,7 +308,7 @@ interface IERC20 {
 
 // OpenZeppelin Contracts v4.4.1 (token/ERC20/extensions/IERC20Metadata.sol)
 
-pragma solidity ^0.8.0;
+// pragma solidity ^0.8.0;
 
 
 /**
@@ -338,7 +338,7 @@ interface IERC20Metadata is IERC20 {
 
 // OpenZeppelin Contracts v4.4.1 (utils/Context.sol)
 
-pragma solidity ^0.8.0;
+// pragma solidity ^0.8.0;
 
 /**
  * @dev Provides information about the current execution context, including the
@@ -365,7 +365,7 @@ abstract contract Context {
 
 // OpenZeppelin Contracts (last updated v4.9.0) (token/ERC20/ERC20.sol)
 
-pragma solidity ^0.8.0;
+// pragma solidity ^0.8.0;
 
 
 
@@ -732,7 +732,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
 
 // OpenZeppelin Contracts (last updated v4.9.0) (access/Ownable.sol)
 
-pragma solidity ^0.8.0;
+// pragma solidity ^0.8.0;
 
 
 /**
@@ -814,7 +814,7 @@ abstract contract Ownable is Context {
 
 // File: updatedCustomToken.sol
 
-pragma solidity >=0.8.18;
+// pragma solidity >=0.8.18;
 
 
 
